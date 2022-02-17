@@ -10,12 +10,12 @@
                 <ion-icon name="cube-outline"></ion-icon>
             </div>
         </a>
-        <a href="page-chat.html" class="item">
+        <!--<a href="page-chat.html" class="item">
             <div class="col">
                 <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
                 <span class="badge badge-danger">5</span>
             </div>
-        </a>
+        </a>-->
         <a href="app-pages.html" class="item">
             <div class="col">
                 <ion-icon name="layers-outline"></ion-icon>

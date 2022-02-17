@@ -2,17 +2,16 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body p-0">
-
                     <!-- profile box -->
                     <div class="profileBox">
                         <div class="image-wrapper">
                             <img src="assets/img/sample/avatar/avatar1.jpg" alt="image" class="imaged rounded">
                         </div>
                         <div class="in">
-                            <strong>><?=$_SESSION['student_id']?></strong>
+                            <strong><?php echo htmlspecialchars($_SESSION["user_full_name"]); ?></strong>
                             <div class="text-muted">
                                 <ion-icon name="location"></ion-icon>
-                                California
+                                <?php echo htmlspecialchars($_SESSION["school_name"]); ?>
                             </div>
                         </div>
                         <a href="javascript:;" class="close-sidebar-button" data-dismiss="modal">
@@ -81,7 +80,7 @@
                     </ul>
 
                     <div class="listview-title mt-2 mb-1">
-                        <span>Friends</span>
+                        <span>Elections</span>
                     </div>
                     <ul class="listview image-listview flush transparent no-line">
                         <li>
@@ -140,7 +139,7 @@
                     <a href="javascript:;" class="button">
                         <ion-icon name="settings-outline"></ion-icon>
                     </a>
-                    <a href="javascript:;" class="button">
+                    <a href="logout" class="button">
                         <ion-icon name="log-out-outline"></ion-icon>
                     </a>
                 </div>
