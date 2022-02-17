@@ -3,9 +3,9 @@ session_start();
 include '../loginConfig.php';
 
 
-if (isset($_POST['user_id']) && isset($_POST['password'])) {
+if (isset($_POST['student_id']) && isset($_POST['password'])) {
 	
-	$email = $_POST['user_id'];
+	$email = $_POST['student_id'];
 	$password = $_POST['password'];
 
 	if (empty($email)) {
@@ -19,11 +19,13 @@ if (isset($_POST['user_id']) && isset($_POST['password'])) {
 		if ($stmt->rowCount() === 1) {
 			$user = $stmt->fetch();		
 
+			// Store data in session variables
+			$_SESSION["loggedin"] = true;
 			$user_id = $user['student_id'];
 			//$user_email = $user['student_id'];
 			$user_password = $user['user_password'];
-			$user_full_name = $user['firstname'] . " " . $user['middlename'] . " " . $user['lastname'];
-			$user_department = $user['depatment_name'];
+			$user_full_name = $user['firstname'] . " "  . $user['lastname'];
+			$user_department = $user['department_name_abbreviation'];
 			$user_school = $user['school_name'];
 			$user_profile = $user['profile_pic'];
 			$user_account_status = $user['account_status'];
@@ -39,7 +41,7 @@ if (isset($_POST['user_id']) && isset($_POST['password'])) {
 						$_SESSION['account_status'] = $user_account_status;
 						//$_SESSION['admin_type'] = $user_admin_type;
 						
-						header("Location: index.php");
+						header("Location: ../");
 					} else{
 						header("Location: page-login.php?error= Your account has been deactivated");
 					}

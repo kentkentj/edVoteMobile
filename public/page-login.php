@@ -1,7 +1,7 @@
 <?php 
   session_start();
 
-  if (!isset($_SESSION['user_id'])) { 
+  if (!isset($_SESSION['student_id'])) { 
 ?>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
