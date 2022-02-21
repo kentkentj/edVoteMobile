@@ -23,10 +23,12 @@ if (isset($_POST['student_id']) && isset($_POST['password'])) {
 			$_SESSION["loggedin"] = true;
 			$user_id = $user['student_id'];
 			//$user_email = $user['student_id'];
+		
 			$user_password = $user['user_password'];
 			$user_full_name = $user['firstname'] . " "  . $user['lastname'];
 			$user_department = $user['department_name_abbreviation'];
 			$user_school = $user['school_name'];
+			$user_school_id = $user['school_id'];
 			$user_profile = $user['profile_pic'];
 			$user_account_status = $user['account_status'];
 
@@ -39,9 +41,9 @@ if (isset($_POST['student_id']) && isset($_POST['password'])) {
 						$_SESSION['depatment_name'] = $user_department;
 						$_SESSION['school_name'] = $user_school;
 						$_SESSION['account_status'] = $user_account_status;
-						//$_SESSION['admin_type'] = $user_admin_type;
+						$_SESSION['school_id'] = $user_school_id;
 						
-						header("Location: ../");
+						header("Location: ../public");
 					} else{
 						header("Location: page-login.php?error= Your account has been deactivated");
 					}

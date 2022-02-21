@@ -1,46 +1,29 @@
+<?php 
+try{
+    require "../config.php";
+	require "../common.php";
+	$connection=new PDO($dsn, $username, $password, $options);
+   
+    /*$school = $_SESSION['school_name'];
+    $department = $_SESSION['depatment_name'];*/
+
+	$sql="SELECT * FROM campaigntable WHERE school_id = 'UC-BCF' OR department_id =  1";
+
+	$statement = $connection->prepare($sql);
+  	$statement->execute();
+	$result_campaign = $statement->fetchAll();
+
+} catch(PDOException $error){
+	echo $sql . "<br>" . $error->getMessage();
+}
+?>
 <!--html head-->
 <?php include 'templates/header.php' ?>
 <!--html head end-->
 
-    <!-- loader -->
-    <div id="loader">
-        <div class="spinner-border text-primary" role="status"></div>
-    </div>
-    <!-- * loader -->
-
-    <!-- App Header -->
-    <div class="appHeader bg-primary scrolled">
-        <div class="left">
-            <a href="#" class="headerButton" data-toggle="modal" data-target="#sidebarPanel">
-                <ion-icon name="menu-outline"></ion-icon>
-            </a>
-        </div>
-        <div class="pageTitle">
-            Discover
-        </div>
-        <div class="right">
-            <a href="javascript:;" class="headerButton toggle-searchbox">
-                <ion-icon name="search-outline"></ion-icon>
-            </a>
-        </div>
-    </div>
-    <!-- * App Header -->
-
-    <!-- Search Component -->
-    <div id="search" class="appHeader">
-        <form class="search-form">
-            <div class="form-group searchbox">
-                <input type="text" class="form-control" placeholder="Search...">
-                <i class="input-icon">
-                    <ion-icon name="search-outline"></ion-icon>
-                </i>
-                <a href="javascript:;" class="ml-1 close toggle-searchbox">
-                    <ion-icon name="close-circle"></ion-icon>
-                </a>
-            </div>
-        </form>
-    </div>
-    <!-- * Search Component -->
+    <!-- loader , App Header, Search Component , Search Component -->
+    <?php include 'templates/toolbar.php' ?>
+    <!-- * loader , App Header, Search Component , Search Component -->
 
     <!-- App Capsule -->
     <div id="appCapsule">
@@ -125,14 +108,16 @@
             </div>
         </div>
 
+        <!--campaign section start -->
+        <?php foreach ($result_campaign as $row) : ?>
         <div class="section mt-3 mb-3">
             <div class="card">
-                <img src="assets/img/sample/photo/wide4.jpg" class="card-img-top" alt="image">
+                <img src="<?php echo  $campaign_image_path . escape($row["images"]);?>" class="card-img-top" alt="image">
                 <div class="card-body">
-                    <h6 class="card-subtitle">Discover</h6>
-                    <h5 class="card-title">Components</h5>
+                    <h6 class="card-subtitle"><?php echo escape($row["candidate_name"]); ?></h6>
+                    <h5 class="card-title"><?php echo escape($row["campaign_post_title"]); ?></h5>
                     <p class="card-text">
-                        Reusable components designed for the mobile interface and ready to use.
+                        <?php echo escape($row["caption"]); ?>
                     </p>
                     <a href="app-components.html" class="btn btn-primary">
                         <ion-icon name="cube-outline"></ion-icon>
@@ -141,23 +126,8 @@
                 </div>
             </div>
         </div>
-
-        <div class="section mt-3 mb-3">
-            <div class="card">
-                <img src="assets/img/sample/photo/wide2.jpg" class="card-img-top" alt="image">
-                <div class="card-body">
-                    <h6 class="card-subtitle">Discover</h6>
-                    <h5 class="card-title">Pages</h5>
-                    <p class="card-text">
-                        Mobilekit comes with basic pages you may need and use in your projects easily.
-                    </p>
-                    <a href="app-pages.html" class="btn btn-primary">
-                        <ion-icon name="layers-outline"></ion-icon>
-                        Preview
-                    </a>
-                </div>
-            </div>
-        </div>
+        <?php endforeach; ?>
+        <!--campaign section end -->
 
 
         <!-- app footer -->
@@ -204,6 +174,7 @@
     <!-- App Sidebar -->
     <?php include 'templates/side_bar.php' ?>
     <!-- * App Sidebar -->
+
 
     <!-- welcome notification  -->
     <div id="notification-welcome" class="notification-box">

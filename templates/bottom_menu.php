@@ -1,13 +1,13 @@
 <!-- App Bottom Menu -->
 <div class="appBottomMenu">
-        <a href="index.html" class="item active">
+        <a href="../public" class="item <?php echo (basename($_SERVER['PHP_SELF']) == 'index.php' ? 'active' : '')?>">
             <div class="col">
                 <ion-icon name="home-outline"></ion-icon>
             </div>
         </a>
-        <a href="app-components.html" class="item">
+        <a href="election" class="item <?php echo (basename($_SERVER['PHP_SELF']) == 'election.php' || basename($_SERVER['PHP_SELF']) == 'balot.php' ? 'active' : '')?>">
             <div class="col">
-                <ion-icon name="cube-outline"></ion-icon>
+                <ion-icon name="archive-outline"></ion-icon>
             </div>
         </a>
         <!--<a href="page-chat.html" class="item">

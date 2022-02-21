@@ -1,3 +1,19 @@
+<?php 
+try{
+    require_once "../config.php";
+	require_once "../common.php";
+	$connection=new PDO($dsn, $username, $password, $options);
+
+	$sql="SELECT * FROM electionevent";
+
+	$statement = $connection->prepare($sql);
+  	$statement->execute();
+	$result_campaign_ = $statement->fetchAll();
+
+} catch(PDOException $error){
+	echo $sql . "<br>" . $error->getMessage();
+}
+?>
 <div class="modal fade panelbox panelbox-left" id="sidebarPanel" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -22,7 +38,7 @@
 
                     <ul class="listview flush transparent no-line image-listview mt-2">
                         <li>
-                            <a href="index.html" class="item">
+                            <a href="../public" class="item">
                                 <div class="icon-box bg-primary">
                                     <ion-icon name="home-outline"></ion-icon>
                                 </div>
@@ -83,15 +99,17 @@
                         <span>Elections</span>
                     </div>
                     <ul class="listview image-listview flush transparent no-line">
+                        <?php foreach ($result_campaign_ as $row) : ?>
                         <li>
-                            <a href="page-chat.html" class="item">
+                            <a href="balot?electionid=<?php echo escape($row["election_id"]); ?>" class="item">
                                 <img src="assets/img/sample/avatar/avatar7.jpg" alt="image" class="image">
                                 <div class="in">
-                                    <div>Sophie Asveld</div>
+                                    <div><?php echo escape($row["election_name"]); ?></div>
                                 </div>
                             </a>
                         </li>
-                        <li>
+                        <?php endforeach; ?>
+                        <!--<li>
                             <a href="page-chat.html" class="item">
                                 <img src="assets/img/sample/avatar/avatar3.jpg" alt="image" class="image">
                                 <div class="in">
@@ -123,7 +141,7 @@
                                     <div>Henry Doe</div>
                                 </div>
                             </a>
-                        </li>
+                        </li>-->
                     </ul>
 
                 </div>
@@ -133,7 +151,7 @@
                     <a href="javascript:;" class="button">
                         <ion-icon name="person-outline"></ion-icon>
                     </a>
-                    <a href="javascript:;" class="button">
+                    <a href="election" class="button">
                         <ion-icon name="archive-outline"></ion-icon>
                     </a>
                     <a href="javascript:;" class="button">
